@@ -1,0 +1,83 @@
+Certainly! Here’s a detailed description for your Robo Speaker mini project to include in your GitHub repository:
+
+---
+
+# Robo Speaker 0.1
+
+Welcome to Robo Speaker 0.1, a simple and fun Python-based text-to-speech (TTS) application that uses your system's speaker to vocalize any text input through the command line interface (CLI). This project was created by Mahi.
+
+## Project Overview
+
+Robo Speaker 0.1 is a mini project designed to demonstrate basic text-to-speech capabilities using Python. The application listens for user input in the CLI and converts the text into speech, utilizing the system's built-in speaker. It is a straightforward implementation that showcases how to leverage system libraries for speech synthesis.
+
+## Features
+
+- **Text-to-Speech Conversion**: Input any text via the CLI, and Robo Speaker will pronounce it out loud.
+- **Easy Exit**: Type 'q' to exit the application gracefully, with a farewell message.
+
+## How It Works
+
+The project uses PowerShell commands to access the Windows Speech API (System.Speech) for speech synthesis. When the user inputs text, the program constructs a command to be executed by PowerShell, which then performs the text-to-speech conversion.
+
+### Code Explanation
+
+Here's a brief overview of the code:
+
+```python
+import os
+
+if __name__=='__main__':
+    print("Welcome to Robo Speaker 0.1 created by Mahi!")
+    print("Note: Type 'q' to exit - ")
+
+    # Initial greeting
+    command = f'powershell -Command "Add-Type –AssemblyName System.speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak(\'{"Welcome to Robo Speaker"}\')"'
+    os.system(command)
+    
+    while True:
+        x = input("Enter what you want me to pronounce: ")
+        if x == 'q':
+            # Farewell message
+            command = f'powershell -Command "Add-Type –AssemblyName System.speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak(\'{"Good Bye! Have a nice day."}\')"'
+            os.system(command)
+            break
+        
+        # Constructing the PowerShell command to speak the input text
+        command = f'powershell -Command "Add-Type –AssemblyName System.speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak(\'{x}\')"'
+        os.system(command)
+
+
+### Notes for Mac Users
+
+If you are using a macOS, you can replace the PowerShell commands with the `say` command:
+
+```python
+# For macOS
+command = f"say {x}"
+
+
+## How to Run
+
+1. Clone the repository:
+   
+    git clone https://github.com/yourusername/robo-speaker.git
+    cd robo-speaker
+    
+
+2. Run the Python script:
+   
+    python robo_speaker.py
+    
+
+3. Follow the on-screen instructions to input text and hear it spoken aloud.
+
+## Requirements
+
+- Python 3.x
+- Windows OS with PowerShell (for the provided script)
+- Optional: macOS for alternative command (`say`)
+
+## Contributing
+
+Contributions are welcome! If you have ideas for improvements or new features, feel free to fork the repository and submit a pull request.
+
